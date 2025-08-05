@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio 3D - Phạm Dương Hòa</title>
+    <style>
+        /* CSS Reset and Basic Styling */
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #111;
+            color: #eee;
+            overflow: hidden; /* Hide scrollbars */
+        }
+
+        /* Styling for the 3D container and canvas */
+        #container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Styling for each face of the cube */
+        .face {
+            width: 400px;
+            height: 400px;
+            background: rgba(20, 20, 30, 0.85);
+            border: 2px solid rgba(127, 177, 255, 0.75);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 120, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .face h1, .face h2, .face h3 {
+            margin: 0;
+            color: #87CEFA; /* Light Sky Blue */
+        }
+        
+        .face h1 {
+            font-size: 2.2em;
+            margin-bottom: 5px;
+        }
+
+        .face h2 {
+            font-size: 1.5em;
+            font-weight: 400;
+            color: #FFD700; /* Gold */
+            margin-bottom: 20px;
+        }
+        
+        .face h3 {
+            font-size: 1.2em;
+            align-self: flex-start;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #87CEFA;
+            padding-bottom: 5px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .face p, .face ul {
+            margin: 5px 0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .face ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .face li {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+
+        .face a {
+            color: #6495ED; /* Cornflower Blue */
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .face a:hover {
+            color: #FFD700;
+        }
+
+        .face .contact-info p {
+            text-align: center;
+        }
+        
+        .face .section {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .face .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding-left: 0;
+        }
+        
+        .face .skills-list li {
+            background: #334;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        /* Instruction text */
+        #instructions {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1em;
+            z-index: 100;
+            pointer-events: none; /* Make it non-interactive */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container"></div>
+
+    <!-- Instructions for the user -->
+    <div id="instructions">
+        Nhấn và kéo chuột để xoay khối lập phương
+    </div>
+
+    <!-- Hidden divs for cube faces content -->
+    <div style="display:none;">
+        <!-- Face 1: Thông tin cá nhân -->
+        <div id="face1" class="face">
+            <h1>PHẠM DƯƠNG HÒA</h1>
+            <h2>FRONTEND DEVELOPER</h2>
+            <div class="contact-info">
+                <p><a href="mailto:hoakg2000@gmail.com">hoakg2000@gmail.com</a></p>
+                <p>0795 990 798</p>
+                <p><a href="https://linkedin.com/in/hoakg2000" target="_blank">linkedin.com/in/hoakg2000</a></p>
+                <p>Quận Bình Thạnh, TP. Hồ Chí Minh</p>
+            </div>
+        </div>
+        <!-- Face 2: Kinh nghiệm làm việc -->
+        <div id="face2" class="face">
+            <h3>Kinh Nghiệm Làm Việc</h3>
+            <ul>
+                <li><strong>Toyar Inc / FidoVN (8/2024 - Hiện tại):</strong> Frontend Web Developer</li>
+                <li><strong>Freelancer (2022 - Hiện tại):</strong> Fullstack Web Developer</li>
+                <li><strong>TMA Solution (2/2022 - 4/2023):</strong> Web Developer</li>
+            </ul>
+        </div>
+        <!-- Face 3: Dự án -->
+        <div id="face3" class="face">
+            <h3>Dự Án Nổi Bật</h3>
+             <div class="section">
+                <h4>Warframe Market Tracker</h4>
+                <p>Công nghệ: Java Spring, Eureka server, Apache Kafka, SQL, Docker.</p>
+                <p><a href="https://github.com/hoakg2000/warframe-helper" target="_blank">Xem trên GitHub</a></p>
+            </div>
+        </div>
+        <!-- Face 4: Kỹ năng -->
+        <div id="face4" class="face">
+            <h3>Kỹ Năng</h3>
+            <ul class="skills-list">
+                <li>Java Spring</li>
+                <li>ReactJS</li>
+                <li>Angular</li>
+                <li>SQL</li>
+                <li>Docker</li>
+                <li>C#</li>
+                <li>Python</li>
+                <li>Problem-Solving</li>
+                <li>Teamwork</li>
+            </ul>
+        </div>
+        <!-- Face 5: Học vấn & Giải thưởng -->
+        <div id="face5" class="face">
+            <h3>Học Vấn & Giải Thưởng</h3>
+            <div class="section">
+                <h4>Đại học Mở TP.HCM (2018 - 2023)</h4>
+                <p>Cử nhân Công nghệ thông tin (GPA: 2.96/4)</p>
+            </div>
+            <div class="section">
+                 <h4>Giải thưởng</h4>
+                <ul>
+                    <li>Giải Ba & KK Olympic Tin học Sinh viên VN (2019, 2020)</li>
+                    <li>Giải Nhất Olympic cấp trường (2019, 2020)</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Face 6: Mục tiêu nghề nghiệp -->
+        <div id="face6" class="face">
+            <h3>Mục Tiêu Nghề Nghiệp</h3>
+            <p><strong>Ngắn hạn:</strong> Tìm kiếm một vị trí lập trình viên ổn định để phát triển chuyên môn, có cơ hội lấy các chứng chỉ Java và ngoại ngữ.</p>
+            <p><strong>Dài hạn:</strong> Phát triển sự nghiệp trên thị trường toàn cầu, có cơ hội làm việc on-site tại nước ngoài.</p>
+        </div>
+    </div>
+
+    <!-- 
+      Sử dụng importmap để trình duyệt có thể tìm thấy các module 'three' 
+      khi được gọi từ các file khác (như CSS3DRenderer.js).
+      Đây là cách giải quyết lỗi "Failed to resolve module specifier".
+    -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+            }
+        }
+    </script>
+    
+    <!-- Three.js and CSS3DRenderer scripts -->
+    <script type="module">
+        // Sử dụng các module specifier (ví dụ 'three') đã được định nghĩa trong importmap
+        import * as THREE from 'three';
+        import { CSS3DObject, CSS3DRenderer } from 'three/addons/renderers/CSS3DRenderer.js';
+
+        let camera, scene, renderer;
+        let cube;
+        let isMouseDown = false;
+        let mouseX = 0, mouseY = 0;
+        let targetRotationX = 0, targetRotationY = 0;
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        init();
+        animate();
+
+        function init() {
+            // Scene setup
+            scene = new THREE.Scene();
+
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.z = 600;
+
+            // Create the cube
+            const cubeGeometry = new THREE.BoxGeometry(400, 400, 400);
+            const cubeMaterials = []; // We don't need materials for CSS3DRenderer
+            cube = new THREE.Group();
+
+            // Create CSS3DObjects for each face
+            const faceElements = ['face1', 'face2', 'face3', 'face4', 'face5', 'face6'];
+            const positions = [
+                new THREE.Vector3(0, 0, 200),   // front
+                new THREE.Vector3(200, 0, 0),   // right
+                new THREE.Vector3(-200, 0, 0),  // left
+                new THREE.Vector3(0, 0, -200),  // back
+                new THREE.Vector3(0, 200, 0),   // top
+                new THREE.Vector3(0, -200, 0)   // bottom
+            ];
+            const rotations = [
+                new THREE.Euler(0, 0, 0),
+                new THREE.Euler(0, Math.PI / 2, 0),
+                new THREE.Euler(0, -Math.PI / 2, 0),
+                new THREE.Euler(0, Math.PI, 0),
+                new THREE.Euler(-Math.PI / 2, 0, 0),
+                new THREE.Euler(Math.PI / 2, 0, 0)
+            ];
+
+            for (let i = 0; i < 6; i++) {
+                const element = document.getElementById(faceElements[i]);
+                const object = new CSS3DObject(element);
+                object.position.copy(positions[i]);
+                object.rotation.copy(rotations[i]);
+                cube.add(object);
+            }
+            
+            scene.add(cube);
+
+            // Renderer setup
+            renderer = new CSS3DRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('container').appendChild(renderer.domElement);
+
+            // Event Listeners
+            document.addEventListener('mousedown', onMouseDown, false);
+            document.addEventListener('mousemove', onMouseMove, false);
+            document.addEventListener('mouseup', onMouseUp, false);
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onMouseDown(event) {
+            event.preventDefault();
+            isMouseDown = true;
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        }
+
+        function onMouseMove(event) {
+            if (isMouseDown) {
+                const deltaX = event.clientX - mouseX;
+                const deltaY = event.clientY - mouseY;
+                targetRotationY += deltaX * 0.01;
+                targetRotationX += deltaY * 0.01;
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+            }
+        }
+
+        function onMouseUp(event) {
+            isMouseDown = false;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Smooth rotation
+            cube.rotation.y += (targetRotationY - cube.rotation.y) * 0.05;
+            cube.rotation.x += (targetRotationX - cube.rotation.x) * 0.05;
+
+            renderer.render(scene, camera);
+        }
+
+    </script>
+</body>
+</html>
