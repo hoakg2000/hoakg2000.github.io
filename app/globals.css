@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f9f9fb;
+  --surface: #ffffff;
+  --ink: #121212;
+  --muted: #5f5f66;
+  --faint: #8d8d94;
+  --line: rgb(18 18 18 / 0.09);
+  --line-strong: rgb(18 18 18 / 0.16);
+  --accent: #a4543a;
+  --accent-soft: rgb(164 84 58 / 0.08);
+  --grain-opacity: 0.035;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #121212;
+  --surface: #181818;
+  --ink: #ecebe8;
+  --muted: #a3a29e;
+  --faint: #74736f;
+  --line: rgb(236 235 232 / 0.08);
+  --line-strong: rgb(236 235 232 / 0.15);
+  --accent: #d58e70;
+  --accent-soft: rgb(213 142 112 / 0.1);
+  --grain-opacity: 0.05;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Paper-like grain over the whole page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.serif-display {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+/* Hide content until the stored language is applied, to avoid a language flash */
+html.locale-pending main,
+html.locale-pending header {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
